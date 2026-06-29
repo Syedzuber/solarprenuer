@@ -573,8 +573,8 @@
             <input type="tel" name="Mobile" id="Mobile" class="form-input" placeholder="+91 XXXXX XXXXX" required style="width:100%; border:1.5px solid rgba(82,183,136,.25); border-radius:12px; padding:13px 16px; font-size:15px; color:#132E21; background:#FAF7F0; outline:none; transition:border .2s, background .2s, box-shadow .2s">
           </div>
           <div>
-            <label style="display:block; font-size:13px; font-weight:700; color:#132E21; margin-bottom:8px; letter-spacing:.3px">Email Address</label>
-            <input type="email" name="Email" id="Email" ftype="email" class="form-input" placeholder="your@email.com" style="width:100%; border:1.5px solid rgba(82,183,136,.25); border-radius:12px; padding:13px 16px; font-size:15px; color:#132E21; background:#FAF7F0; outline:none; transition:border .2s, background .2s, box-shadow .2s">
+            <label style="display:block; font-size:13px; font-weight:700; color:#132E21; margin-bottom:8px; letter-spacing:.3px">Email Address *</label>
+            <input type="email" name="Email" id="Email" ftype="email" class="form-input" placeholder="your@email.com" required style="width:100%; border:1.5px solid rgba(82,183,136,.25); border-radius:12px; padding:13px 16px; font-size:15px; color:#132E21; background:#FAF7F0; outline:none; transition:border .2s, background .2s, box-shadow .2s">
           </div>
           <div>
             <label style="display:block; font-size:13px; font-weight:700; color:#132E21; margin-bottom:8px; letter-spacing:.3px">City / Location *</label>
@@ -693,7 +693,7 @@
             <a href="tel:+919811121157" style="color:rgba(216,243,220,.8); text-decoration:none; font-size:15px; font-weight:600">+91 98111 21157</a>
           </div>
           <div>
-            <div style="font-size:11px; color:#52B788; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:4px">Parent Company</div>
+            <div style="font-size:11px; color:#52B788; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:4px">An Initiative by:</div>
             <a href="https://www.horizonrenewablepower.com" target="_blank" class="footer-hrp" style="color:rgba(216,243,220,.8); text-decoration:none; font-size:13.5px; transition:color .2s">Horizon Renewable Power Pvt Ltd</a>
           </div>
           <div>
@@ -715,46 +715,77 @@
 <script>
 function addAriaSelected887886000014198206(){
   var optionElem = event.target;
-  var previousSelectedOption = optionElem.querySelector('[aria-selected=true]');
-  if(previousSelectedOption){
-    previousSelectedOption.removeAttribute('aria-selected');
-  }
+  var prev = optionElem.querySelector('[aria-selected=true]');
+  if(prev){ prev.removeAttribute('aria-selected'); }
   optionElem.querySelectorAll('option')[optionElem.selectedIndex].ariaSelected = 'true';
 }
-function validateEmail887886000014198206(){
-  var form = document.forms['WebToLeads887886000014198206'];
-  var emailFld = form.querySelectorAll('[ftype=email]');
-  for(var i=0;i<emailFld.length;i++){
-    var emailVal = emailFld[i].value;
-    if((emailVal.replace(/^\s+|\s+$/g,'')).length != 0){
-      var atpos = emailVal.indexOf('@');
-      var dotpos = emailVal.lastIndexOf('.');
-      if(atpos<1||dotpos<atpos+2||dotpos+2>=emailVal.length){
-        alert('Please enter a valid email address.');
-        emailFld[i].focus();
-        return false;
-      }
-    }
-  }
-  return true;
-}
+
 function checkMandatory887886000014198206(){
-  var mndFileds = new Array('Last Name','Email','Mobile');
-  var fldLangVal = new Array('Name','Email','Mobile');
-  for(var i=0;i<mndFileds.length;i++){
-    var fieldObj = document.forms['WebToLeads887886000014198206'][mndFileds[i]];
-    if(fieldObj){
-      if(((fieldObj.value).replace(/^\s+|\s+$/g,'')).length==0){
-        alert(fldLangVal[i]+' cannot be empty.');
-        fieldObj.focus();
-        return false;
-      }
+  var form = document.forms['WebToLeads887886000014198206'];
+  var valid = true;
+  var firstInvalid = null;
+
+  // Clear previous errors
+  form.querySelectorAll('.field-error').forEach(function(el){ el.remove(); });
+  ['Last_Name','Email','Mobile','City'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.style.borderColor = 'rgba(82,183,136,.25)';
+  });
+
+  function showError(fieldId, msg){
+    var field = document.getElementById(fieldId);
+    if(!field) return;
+    field.style.borderColor = '#D63031';
+    var err = document.createElement('span');
+    err.className = 'field-error';
+    err.textContent = msg;
+    field.parentNode.insertBefore(err, field.nextSibling);
+    if(!firstInvalid) firstInvalid = field;
+    valid = false;
+  }
+
+  // Name — required
+  var name = (form['Last Name'] ? form['Last Name'].value : '').trim();
+  if(!name) showError('Last_Name', 'Full name is required.');
+
+  // Email — required + valid format
+  var email = (form['Email'] ? form['Email'].value : '').trim();
+  if(!email){
+    showError('Email', 'Email address is required.');
+  } else {
+    var at = email.indexOf('@'), dot = email.lastIndexOf('.');
+    if(at < 1 || dot < at + 2 || dot + 2 >= email.length){
+      showError('Email', 'Please enter a valid email address.');
     }
   }
-  if(!validateEmail887886000014198206()){return false;}
-  document.querySelector('#formsubmit').setAttribute('disabled',true);
-  return true;
+
+  // Mobile — required + 10-digit Indian number starting with 6–9
+  var mobile = (form['Mobile'] ? form['Mobile'].value : '').replace(/[\s\-\+\(\)]/g,'');
+  if(!mobile){
+    showError('Mobile', 'Mobile number is required.');
+  } else if(!/^[6-9]\d{9}$/.test(mobile)){
+    showError('Mobile', 'Enter a valid 10-digit Indian mobile number (starts with 6–9).');
+  }
+
+  // City — required
+  var city = (form['City'] ? form['City'].value : '').trim();
+  if(!city) showError('City', 'City / location is required.');
+
+  if(firstInvalid) firstInvalid.focus();
+  if(valid) document.querySelector('#formsubmit').setAttribute('disabled', true);
+  return valid;
 }
+
+// Clear error state on user input
+['Last_Name','Email','Mobile','City'].forEach(function(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('input', function(){
+    var next = this.nextElementSibling;
+    if(next && next.classList.contains('field-error')) next.remove();
+    this.style.borderColor = 'rgba(82,183,136,.25)';
+  });
+});
 </script>
 </body>
 </html>
