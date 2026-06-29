@@ -1,0 +1,58 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #FAF7F0; color: #132E21; overflow-x: hidden; }
+input, textarea, select, button { font-family: inherit; }
+
+@keyframes spin-slow  { to { transform: rotate(360deg); } }
+@keyframes spin-rev   { to { transform: rotate(-360deg); } }
+@keyframes pulse-sun  { 0%,100% { box-shadow: 0 0 50px rgba(245,197,66,.3); } 50% { box-shadow: 0 0 110px rgba(245,197,66,.65); } }
+@keyframes orbit1 { from { transform: rotate(0deg)   translateX(185px) rotate(0deg);    } to { transform: rotate(360deg)   translateX(185px) rotate(-360deg);   } }
+@keyframes orbit2 { from { transform: rotate(125deg) translateX(225px) rotate(-125deg); } to { transform: rotate(485deg)  translateX(225px) rotate(-485deg);  } }
+@keyframes orbit3 { from { transform: rotate(255deg) translateX(145px) rotate(-255deg); } to { transform: rotate(615deg)  translateX(145px) rotate(-615deg);  } }
+@keyframes dotPulse { 0%,100% { transform: scale(1); opacity:.7; } 50% { transform: scale(1.4); opacity:1; } }
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: translateY(0); } }
+
+input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: rgba(255,255,255,.18); outline: none; cursor: pointer; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #F5C542; cursor: pointer; box-shadow: 0 2px 12px rgba(245,197,66,.5); border: 3px solid #fff; }
+input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #F5C542; cursor: pointer; border: 3px solid #fff; }
+
+/* Nav */
+.nav-link:hover { color: #FAF7F0 !important; }
+.nav-cta:hover { background: #3DA570 !important; }
+
+/* Who cards */
+.who-card { flex: 0 0 calc(33.333% - 16px); max-width: calc(33.333% - 16px); min-width: 264px; }
+.who-card:hover { transform: translateY(-7px) !important; box-shadow: 0 14px 44px rgba(19,46,33,.13) !important; }
+.who-card-green:hover { border-color: rgba(82,183,136,.4) !important; }
+.who-card-amber:hover { border-color: rgba(245,197,66,.5) !important; }
+
+/* Trust / Why section cards */
+.trust-grid > div { flex: 0 0 calc(33.333% - 16px); max-width: calc(33.333% - 16px); min-width: 264px; }
+
+/* Step buttons */
+.step-wa-btn:hover { background: #2D6A4F !important; }
+.step-form-btn:hover { background: #E8B820 !important; }
+
+/* Submit */
+.submit-btn:hover { background: #1C4E38 !important; transform: translateY(-2px) !important; box-shadow: 0 12px 36px rgba(45,106,79,.4) !important; }
+
+/* FAQ */
+.faq-btn:hover { background: rgba(82,183,136,.04) !important; }
+
+/* Footer */
+.footer-link:hover { color: #95D5B2 !important; }
+.footer-wa:hover { background: rgba(37,211,102,.2) !important; }
+.footer-hrp:hover { color: #95D5B2 !important; }
+
+/* Hero CTAs */
+.hero-cta-primary:hover { background: #3DA570 !important; transform: translateY(-2px) !important; box-shadow: 0 14px 42px rgba(82,183,136,.48) !important; }
+.hero-cta-wa:hover { border-color: rgba(82,183,136,.75) !important; color: #FAF7F0 !important; background: rgba(82,183,136,.08) !important; }
+
+/* Form inputs */
+.form-input:focus { border-color: #52B788 !important; background: #fff !important; box-shadow: 0 0 0 3px rgba(82,183,136,.12) !important; outline: none; }
+.form-select:focus { border-color: #52B788 !important; background: #fff !important; outline: none; }
+
+/* Form states */
+#form-success { display: none; }
+#form-container.submitted #form-success { display: block; }
+#form-container.submitted #form-main { display: none; }
