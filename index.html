@@ -84,24 +84,51 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
+/* Prevent horizontal scroll globally */
+html, body { overflow-x: hidden; }
+
+/* Mobile menu — hidden by default, shown only on mobile */
+#mobile-menu-btn { display: none; }
+#mobile-menu {
+  position: fixed; top: 72px; left: 0; right: 0; z-index: 199;
+  background: rgba(10,26,18,.98); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  padding: 16px 20px 24px; display: none; flex-direction: column;
+  border-bottom: 1px solid rgba(82,183,136,.15); box-shadow: 0 12px 40px rgba(0,0,0,.4);
+}
+#mobile-menu.open { display: flex; }
+#mobile-menu a { color: #95D5B2; text-decoration: none; font-size: 16px; font-weight: 500; padding: 14px 4px; border-bottom: 1px solid rgba(82,183,136,.09); display: block; transition: color .2s; }
+#mobile-menu a:hover { color: #FAF7F0; }
+#mobile-menu .mob-cta { border-bottom: none !important; margin-top: 14px; background: #52B788; color: #132E21; padding: 14px 28px; border-radius: 100px; font-weight: 800; text-align: center; font-size: 15px; }
+
 @media (max-width: 768px) {
   /* Nav */
   nav { padding: 0 18px !important; }
   #nav-links .nav-link { display: none !important; }
+  #mobile-menu-btn { display: flex !important; }
 
-  /* Hero */
-  #hero-sun { display: none !important; }
-  #hero-content { padding: 44px 20px 72px !important; }
+  /* Hero animation — scaled down, bottom-right corner */
+  #hero-sun {
+    display: block !important;
+    right: -90px !important;
+    top: 40% !important;
+    transform: translateY(-50%) scale(0.3) !important;
+    transform-origin: center right;
+    opacity: 0.45;
+  }
+  #hero-content { padding: 44px 20px 80px !important; }
   #hero-earn-card { flex-direction: column !important; align-items: flex-start !important; padding: 18px 20px !important; width: 100% !important; box-sizing: border-box !important; }
   #hero-earn-divider { display: none !important; }
 
   /* How It Works */
-  #how-steps { grid-template-columns: 1fr !important; max-width: 480px; margin-left: auto; margin-right: auto; }
+  #how-steps { grid-template-columns: 1fr !important; max-width: 460px; margin-left: auto; margin-right: auto; }
 
   /* Calculator */
   #calc-card { padding: 32px 18px !important; }
   #calc-slider-header { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
   #calc-earnings { grid-template-columns: 1fr !important; }
+
+  /* Footer */
+  #footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
 
   /* Section / footer horizontal padding */
   section { padding-left: 20px !important; padding-right: 20px !important; }
@@ -125,8 +152,22 @@
     <a href="#how"        class="nav-link" style="color:#95D5B2; text-decoration:none; font-size:14px; font-weight:500; transition:color .2s">How it works</a>
     <a href="#calculator" class="nav-link" style="color:#95D5B2; text-decoration:none; font-size:14px; font-weight:500; transition:color .2s">Earnings</a>
     <a href="#register"   class="nav-cta"  style="background:#52B788; color:#132E21; padding:11px 26px; border-radius:100px; font-weight:800; font-size:14px; text-decoration:none; transition:background .2s">Register Now</a>
+    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" style="background:none; border:1.5px solid rgba(82,183,136,.35); border-radius:8px; padding:0; cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:40px; height:40px">
+      <span class="hb" style="display:block; width:18px; height:2px; background:#95D5B2; border-radius:2px; transition:all .25s"></span>
+      <span class="hb" style="display:block; width:18px; height:2px; background:#95D5B2; border-radius:2px; transition:all .25s"></span>
+      <span class="hb" style="display:block; width:18px; height:2px; background:#95D5B2; border-radius:2px; transition:all .25s"></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile slide-down menu -->
+<div id="mobile-menu">
+  <a href="#who"        onclick="closeMobileMenu()">Who can join</a>
+  <a href="#how"        onclick="closeMobileMenu()">How it works</a>
+  <a href="#calculator" onclick="closeMobileMenu()">Earnings calculator</a>
+  <a href="#faq"        onclick="closeMobileMenu()">FAQs</a>
+  <a href="#register"   onclick="closeMobileMenu()" class="mob-cta">Register Now</a>
+</div>
 
 <!-- ═══ HERO ═══ -->
 <section id="hero" style="min-height:100vh; background:#132E21; position:relative; overflow:hidden; display:flex; align-items:center; padding-top:72px">
@@ -662,7 +703,7 @@
 <!-- ═══ FOOTER ═══ -->
 <footer style="background:#0D1F16; padding:72px 48px 36px; border-top:1px solid rgba(82,183,136,.1)">
   <div style="max-width:1300px; margin:0 auto">
-    <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:60px; padding-bottom:56px; border-bottom:1px solid rgba(82,183,136,.1)">
+    <div id="footer-grid" style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:60px; padding-bottom:56px; border-bottom:1px solid rgba(82,183,136,.1)">
 
       <!-- Brand column -->
       <div>
@@ -722,6 +763,24 @@
 
 <script src="script.js"></script>
 <script>
+function toggleMobileMenu(){
+  var menu = document.getElementById('mobile-menu');
+  var spans = document.querySelectorAll('#mobile-menu-btn .hb');
+  var isOpen = menu.classList.toggle('open');
+  if(isOpen){
+    spans[0].style.transform='rotate(45deg) translate(5px,5px)';
+    spans[1].style.opacity='0';
+    spans[2].style.transform='rotate(-45deg) translate(5px,-5px)';
+  } else {
+    spans[0].style.transform=''; spans[1].style.opacity='1'; spans[2].style.transform='';
+  }
+}
+function closeMobileMenu(){
+  document.getElementById('mobile-menu').classList.remove('open');
+  var spans = document.querySelectorAll('#mobile-menu-btn .hb');
+  spans[0].style.transform=''; spans[1].style.opacity='1'; spans[2].style.transform='';
+}
+
 function addAriaSelected887886000014198206(){
   var optionElem = event.target;
   var prev = optionElem.querySelector('[aria-selected=true]');
