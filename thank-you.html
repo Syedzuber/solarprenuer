@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank You – Solarpreneur</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+html, body { overflow-x: hidden; }
+
+#mobile-menu-btn { display: none; }
+#mobile-menu {
+  position: fixed; top: 72px; left: 0; right: 0; z-index: 199;
+  background: rgba(10,26,18,.98); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  padding: 16px 20px 24px; display: none; flex-direction: column;
+  border-bottom: 1px solid rgba(82,183,136,.15); box-shadow: 0 12px 40px rgba(0,0,0,.4);
+}
+#mobile-menu.open { display: flex; }
+#mobile-menu a { color: #95D5B2; text-decoration: none; font-size: 16px; font-weight: 500; padding: 14px 4px; border-bottom: 1px solid rgba(82,183,136,.09); display: block; transition: color .2s; }
+#mobile-menu a:hover { color: #FAF7F0; }
+#mobile-menu .mob-cta { border-bottom: none !important; margin-top: 14px; background: #52B788; color: #132E21; padding: 14px 28px; border-radius: 100px; font-weight: 800; text-align: center; font-size: 15px; }
+
+@keyframes checkPop { 0% { transform: scale(0) rotate(-10deg); opacity: 0; } 70% { transform: scale(1.15) rotate(2deg); } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+@keyframes fadeUp   { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dotPulse { 0%,100% { transform: scale(1); opacity:.7; } 50% { transform: scale(1.4); opacity:1; } }
+
+.check-circle { animation: checkPop .55s cubic-bezier(.34,1.56,.64,1) both; }
+.fade-up-1 { animation: fadeUp .55s .15s ease both; }
+.fade-up-2 { animation: fadeUp .55s .28s ease both; }
+.fade-up-3 { animation: fadeUp .55s .42s ease both; }
+.fade-up-4 { animation: fadeUp .55s .56s ease both; }
+
+@media (max-width: 768px) {
+  nav { padding: 0 18px !important; }
+  #nav-links .nav-link { display: none !important; }
+  #mobile-menu-btn { display: flex !important; }
+  #footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  section { padding-left: 20px !important; padding-right: 20px !important; }
+  footer  { padding-left: 20px !important; padding-right: 20px !important; }
+  .ty-card { padding: 48px 24px !important; }
+  .ty-steps { flex-direction: column !important; align-items: center !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav style="position:fixed; top:0; left:0; right:0; z-index:200; background:rgba(19,46,33,.97); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); height:72px; display:flex; align-items:center; justify-content:space-between; padding:0 48px; border-bottom:1px solid rgba(82,183,136,.14)">
+  <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:12px">
+    <img src="Assets/Images/hrp-icon-logo.png" alt="Solarpreneur Logo" style="height:44px; width:auto; object-fit:contain; flex-shrink:0">
+    <div>
+      <div style="font-family:'DM Serif Display',serif; color:#FAF7F0; font-size:22px; line-height:1.15; letter-spacing:.2px">Solarpreneur</div>
+      <div style="font-size:10px; color:#95D5B2; letter-spacing:1.8px; text-transform:uppercase; line-height:1">by Horizon Renewable Power</div>
+    </div>
+  </a>
+  <div id="nav-links" style="display:flex; align-items:center; gap:36px">
+    <a href="index.html#who"        class="nav-link" style="color:#95D5B2; text-decoration:none; font-size:14px; font-weight:500; transition:color .2s">Who can join</a>
+    <a href="index.html#how"        class="nav-link" style="color:#95D5B2; text-decoration:none; font-size:14px; font-weight:500; transition:color .2s">How it works</a>
+    <a href="index.html#calculator" class="nav-link" style="color:#95D5B2; text-decoration:none; font-size:14px; font-weight:500; transition:color .2s">Earnings</a>
+    <a href="index.html"            class="nav-cta"  style="background:#52B788; color:#132E21; padding:11px 26px; border-radius:100px; font-weight:800; font-size:14px; text-decoration:none; transition:background .2s">Back to Home</a>
+    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu" style="background:none; border:1.5px solid rgba(82,183,136,.35); border-radius:8px; padding:0; cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:40px; height:40px">
+      <span class="hb" style="display:block; width:18px; height:2px; background:#95D5B2; border-radius:2px; transition:all .25s"></span>
+      <span class="hb" style="display:block; width:18px; height:2px; background:#95D5B2; border-radius:2px; transition:all .25s"></span>
+      <span class="hb" style="display:block; width:18px; height:2px; background:#95D5B2; border-radius:2px; transition:all .25s"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile slide-down menu -->
+<div id="mobile-menu">
+  <a href="index.html#who"        onclick="closeMobileMenu()">Who can join</a>
+  <a href="index.html#how"        onclick="closeMobileMenu()">How it works</a>
+  <a href="index.html#calculator" onclick="closeMobileMenu()">Earnings calculator</a>
+  <a href="index.html#faq"        onclick="closeMobileMenu()">FAQs</a>
+  <a href="index.html"            onclick="closeMobileMenu()" class="mob-cta">Back to Home</a>
+</div>
+
+<!-- ═══ THANK YOU SECTION ═══ -->
+<section style="min-height:100vh; background:#132E21; display:flex; align-items:center; justify-content:center; padding:112px 24px 72px; position:relative; overflow:hidden">
+
+  <!-- Dot-grid texture -->
+  <div style="position:absolute; inset:0; background-image:radial-gradient(rgba(82,183,136,.13) 1.5px, transparent 1.5px); background-size:36px 36px; pointer-events:none"></div>
+
+  <!-- Glow blob -->
+  <div style="position:absolute; width:480px; height:480px; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle, rgba(82,183,136,.12) 0%, transparent 70%); filter:blur(48px); pointer-events:none"></div>
+
+  <div style="max-width:680px; width:100%; position:relative; z-index:5; text-align:center">
+
+    <!-- Check circle -->
+    <div class="check-circle" style="width:96px; height:96px; border-radius:50%; background:linear-gradient(135deg,#2D6A4F,#52B788); display:flex; align-items:center; justify-content:center; margin:0 auto 36px; box-shadow:0 0 0 16px rgba(82,183,136,.1), 0 0 60px rgba(82,183,136,.3)">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FAF7F0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20,6 9,17 4,12"/>
+      </svg>
+    </div>
+
+    <!-- Pill tag -->
+    <div class="fade-up-1" style="display:inline-flex; align-items:center; gap:9px; background:rgba(82,183,136,.12); border:1px solid rgba(82,183,136,.28); border-radius:100px; padding:7px 18px; margin-bottom:24px">
+      <div style="width:7px; height:7px; border-radius:50%; background:#52B788; animation:dotPulse 2s ease-in-out infinite"></div>
+      <span style="color:#95D5B2; font-size:12.5px; font-weight:600; letter-spacing:.8px">Registration Received</span>
+    </div>
+
+    <!-- Heading -->
+    <h1 class="fade-up-1" style="font-family:'DM Serif Display',serif; color:#FAF7F0; font-size:clamp(40px,5vw,72px); line-height:1.05; margin:0 0 8px">
+      Welcome to <span style="color:#F5C542">Solarpreneur!</span>
+    </h1>
+
+    <!-- Hindi -->
+    <div class="fade-up-2" style="font-family:'DM Serif Display',serif; font-style:italic; color:#95D5B2; font-size:clamp(16px,2vw,22px); margin-bottom:28px">
+      आपका स्वागत है
+    </div>
+
+    <!-- Body copy -->
+    <p class="fade-up-2" style="color:rgba(216,243,220,.78); font-size:17px; line-height:1.8; margin:0 0 48px">
+      Your registration is confirmed. Our team will reach out on WhatsApp within <strong style="color:#FAF7F0">24 hours</strong> to get you onboarded and share your referral details.
+    </p>
+
+    <!-- What happens next -->
+    <div class="fade-up-3 ty-card" style="background:rgba(255,255,255,.05); border:1.5px solid rgba(82,183,136,.18); border-radius:24px; padding:40px 48px; margin-bottom:40px; text-align:left">
+      <div style="font-size:12px; font-weight:700; color:#52B788; text-transform:uppercase; letter-spacing:2.5px; margin-bottom:28px; text-align:center">What happens next</div>
+      <div class="ty-steps" style="display:flex; gap:0; justify-content:space-between">
+
+        <div style="text-align:center; flex:1; padding:0 12px">
+          <div style="width:48px; height:48px; border-radius:50%; background:#2D6A4F; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-family:'DM Serif Display',serif; color:#F5C542; font-size:20px">1</div>
+          <div style="font-weight:700; font-size:14px; color:#FAF7F0; margin-bottom:6px">WhatsApp Call</div>
+          <p style="color:rgba(149,213,178,.7); font-size:13px; line-height:1.6; margin:0">Our team contacts you within 24 hrs to welcome you.</p>
+        </div>
+
+        <div style="width:1px; background:rgba(82,183,136,.15); flex-shrink:0; margin:0 8px"></div>
+
+        <div style="text-align:center; flex:1; padding:0 12px">
+          <div style="width:48px; height:48px; border-radius:50%; background:#2D6A4F; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-family:'DM Serif Display',serif; color:#F5C542; font-size:20px">2</div>
+          <div style="font-weight:700; font-size:14px; color:#FAF7F0; margin-bottom:6px">Quick Onboarding</div>
+          <p style="color:rgba(149,213,178,.7); font-size:13px; line-height:1.6; margin:0">Get your referral ID, dashboard access, and pitch kit.</p>
+        </div>
+
+        <div style="width:1px; background:rgba(82,183,136,.15); flex-shrink:0; margin:0 8px"></div>
+
+        <div style="text-align:center; flex:1; padding:0 12px">
+          <div style="width:48px; height:48px; border-radius:50%; background:#2D6A4F; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-family:'DM Serif Display',serif; color:#F5C542; font-size:20px">3</div>
+          <div style="font-weight:700; font-size:14px; color:#FAF7F0; margin-bottom:6px">Start Referring</div>
+          <p style="color:rgba(149,213,178,.7); font-size:13px; line-height:1.6; margin:0">Share leads, track them live, earn ₹1000/kW on every deal.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="fade-up-4" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center">
+      <a href="https://wa.me/919811121157?text=Hi%2C%20I%20just%20registered%20as%20a%20Solarpreneur.%20Looking%20forward%20to%20getting%20started!" target="_blank" class="hero-cta-primary" style="background:#25D366; color:#fff; padding:16px 36px; border-radius:100px; font-weight:800; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:10px; box-shadow:0 8px 28px rgba(37,211,102,.3); transition:all .2s">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Message Us on WhatsApp
+      </a>
+      <a href="index.html" class="hero-cta-wa" style="border:1.5px solid rgba(82,183,136,.38); color:#95D5B2; padding:16px 32px; border-radius:100px; font-weight:600; font-size:15px; text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition:all .2s">
+        Back to Home
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer style="background:#0D1F16; padding:72px 48px 36px; border-top:1px solid rgba(82,183,136,.1)">
+  <div style="max-width:1300px; margin:0 auto">
+    <div id="footer-grid" style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:60px; padding-bottom:56px; border-bottom:1px solid rgba(82,183,136,.1)">
+
+      <!-- Brand column -->
+      <div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px">
+          <img src="Assets/Images/hrp-icon-logo.png" alt="Solarpreneur Logo" style="height:44px; width:auto; object-fit:contain; flex-shrink:0">
+          <div>
+            <div style="font-family:'DM Serif Display',serif; color:#FAF7F0; font-size:22px; line-height:1.15">Solarpreneur</div>
+            <div style="font-size:10px; color:#52B788; letter-spacing:1.6px; text-transform:uppercase">by Horizon Renewable Power</div>
+          </div>
+        </div>
+        <p style="color:rgba(216,243,220,.6); font-size:14.5px; line-height:1.75; margin:0 0 24px; max-width:320px">India's influencer-driven solar referral programme. Help homes and businesses go green — and earn from every KW you bring.</p>
+        <a href="https://wa.me/919811121157" target="_blank" class="footer-wa" style="display:inline-flex; align-items:center; gap:9px; background:rgba(37,211,102,.12); border:1px solid rgba(37,211,102,.25); color:#25D366; padding:12px 22px; border-radius:100px; font-size:13.5px; font-weight:600; text-decoration:none; transition:background .2s">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          +91 98111 21157
+        </a>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <div style="font-weight:700; font-size:13px; color:#FAF7F0; text-transform:uppercase; letter-spacing:1.6px; margin-bottom:24px">Quick Links</div>
+        <div style="display:flex; flex-direction:column; gap:14px">
+          <a href="index.html"            class="footer-link" style="color:rgba(216,243,220,.6); text-decoration:none; font-size:14.5px; transition:color .2s">Home</a>
+          <a href="index.html#who"        class="footer-link" style="color:rgba(216,243,220,.6); text-decoration:none; font-size:14.5px; transition:color .2s">Who can join</a>
+          <a href="index.html#how"        class="footer-link" style="color:rgba(216,243,220,.6); text-decoration:none; font-size:14.5px; transition:color .2s">How it works</a>
+          <a href="index.html#calculator" class="footer-link" style="color:rgba(216,243,220,.6); text-decoration:none; font-size:14.5px; transition:color .2s">Earnings calculator</a>
+          <a href="index.html#register"   class="footer-link" style="color:rgba(216,243,220,.6); text-decoration:none; font-size:14.5px; transition:color .2s">Register now</a>
+          <a href="index.html#faq"        class="footer-link" style="color:rgba(216,243,220,.6); text-decoration:none; font-size:14.5px; transition:color .2s">FAQs</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <div style="font-weight:700; font-size:13px; color:#FAF7F0; text-transform:uppercase; letter-spacing:1.6px; margin-bottom:24px">Contact</div>
+        <div style="display:flex; flex-direction:column; gap:16px">
+          <div>
+            <div style="font-size:11px; color:#52B788; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:4px">WhatsApp / Call</div>
+            <a href="tel:+919811121157" style="color:rgba(216,243,220,.8); text-decoration:none; font-size:15px; font-weight:600">+91 98111 21157</a>
+          </div>
+          <div>
+            <div style="font-size:11px; color:#52B788; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:4px">An Initiative by:</div>
+            <a href="https://www.horizonrenewablepower.com" target="_blank" class="footer-hrp" style="color:rgba(216,243,220,.8); text-decoration:none; font-size:13.5px; transition:color .2s">Horizon Renewable Power Pvt Ltd</a>
+          </div>
+          <div>
+            <div style="font-size:11px; color:#52B788; text-transform:uppercase; letter-spacing:1.2px; margin-bottom:4px">Website</div>
+            <a href="https://www.horizonrenewablepower.com" target="_blank" class="footer-link" style="color:rgba(216,243,220,.6); text-decoration:none; font-size:13.5px; transition:color .2s">horizonrenewablepower.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; padding-top:28px; flex-wrap:wrap; gap:12px">
+      <p style="color:rgba(216,243,220,.35); font-size:13px; margin:0">© 2025 Horizon Renewable Power Pvt Ltd. All rights reserved. &nbsp;·&nbsp; solarpreneur.in</p>
+      <p style="color:rgba(216,243,220,.3); font-size:12px; margin:0; font-style:italic">Your Network. Our Expertise. A Greener India Together.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMobileMenu(){
+  var menu = document.getElementById('mobile-menu');
+  var spans = document.querySelectorAll('#mobile-menu-btn .hb');
+  var isOpen = menu.classList.toggle('open');
+  if(isOpen){
+    spans[0].style.transform='rotate(45deg) translate(5px,5px)';
+    spans[1].style.opacity='0';
+    spans[2].style.transform='rotate(-45deg) translate(5px,-5px)';
+  } else {
+    spans[0].style.transform=''; spans[1].style.opacity='1'; spans[2].style.transform='';
+  }
+}
+function closeMobileMenu(){
+  document.getElementById('mobile-menu').classList.remove('open');
+  var spans = document.querySelectorAll('#mobile-menu-btn .hb');
+  spans[0].style.transform=''; spans[1].style.opacity='1'; spans[2].style.transform='';
+}
+</script>
+</body>
+</html>
